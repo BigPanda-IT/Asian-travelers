@@ -24,13 +24,6 @@
       
       <!-- ЦЕНТРАЛЬНАЯ ЛЕНТА -->
       <div class="feed-wrapper" id="feed">
-        <!-- Форма публикации -->
-        <app-publish-form
-          *ngIf="showPublishForm"
-          (published)="onPostPublished()"
-          (closed)="closePublishForm()">
-        </app-publish-form>
-        
         <!-- Список статей -->
         <app-post-list
           [filterCountry]="selectedCountry">
@@ -43,5 +36,11 @@
       </aside>
       
     </div>
+
+    <app-publish-form
+      *ngIf="showPublishForm"
+      (published)="onPostPublished()"
+      (closed)="closePublishForm()">
+    </app-publish-form>
   </main>
 </div>

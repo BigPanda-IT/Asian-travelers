@@ -1,4 +1,5 @@
-<div class="publish-card">
+<div class="area-card">
+  <div class="publish-card">
     <div class="publish-header">
       <div class="publish-icon">📝</div>
       <h3>Поделиться находкой</h3>
@@ -8,7 +9,7 @@
     <form [formGroup]="publishForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label>Заголовок *</label>
-        <input type="text" formControlName="title" placeholder="Например: Секретный водопад на Бали">
+        <input type="text" formControlName="title">
       </div>
       
       <div class="form-group">
@@ -24,23 +25,22 @@
           </select>
         </div>
         <div class="form-group">
+          <label>Теги (через запятую)</label>
+          <input type="text" formControlName="tags" placeholder="#путешествия, #азия...">
+        </div>
+        <div class="form-group">
           <label>Время чтения (мин)</label>
           <input type="number" formControlName="readTime" min="1" max="30">
         </div>
       </div>
       
-      <div class="form-group">
-        <label>Теги (через запятую)</label>
-        <input type="text" formControlName="tags" placeholder="путешествия, азия, пляж">
-      </div>
-      
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>URL фото</label>
         <input type="url" formControlName="imageUrl" (input)="onImageUrlChange()" placeholder="https://...">
         <div class="image-preview" *ngIf="previewUrl">
           <img [src]="previewUrl" alt="Preview">
         </div>
-      </div>
+      </div> -->
       
       <div class="form-actions">
         <button type="button" class="btn-cancel" (click)="close()">Отмена</button>
@@ -50,3 +50,4 @@
       </div>
     </form>
   </div>
+</div>
