@@ -1,0 +1,25 @@
+<div class="sidebar-left">
+    <div class="sidebar-header">
+      <span class="icon">📍</span>
+      <h3>Страны</h3>
+    </div>
+    
+    <div class="countries-list">
+      <div class="country-item" 
+           [class.active]="selectedCountry === 'all'"
+           (click)="selectCountry('all')">
+        <span>🌍</span>
+        <span>Все страны</span>
+        <span class="count">{{totalPosts}}</span>
+      </div>
+      
+      <div class="country-item" 
+           *ngFor="let country of countries"
+           [class.active]="selectedCountry === country.name"
+           (click)="selectCountry(country.name)">
+        <span>{{country.flag}}</span>
+        <span>{{country.name}}</span>
+        <span class="count">{{country.count}}</span>
+      </div>
+    </div>
+  </div>

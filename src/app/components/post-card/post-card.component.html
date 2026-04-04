@@ -1,0 +1,37 @@
+<div class="post-card" (click)="openPost()">
+    <div class="post-image" *ngIf="post.imageUrl">
+      <img [src]="post.imageUrl" [alt]="post.title">
+      <div class="post-read-time">⏱️ {{post.readTime}} мин</div>
+    </div>
+    
+    <div class="post-content">
+      <div class="post-tags">
+        <span class="tag" *ngFor="let tag of post.tags.slice(0,3)">
+          #{{tag}}
+        </span>
+      </div>
+      
+      <h3 class="post-title">{{post.title}}</h3>
+      <p class="post-description">{{post.description}}</p>
+      
+      <div class="post-footer">
+        <div class="post-author">
+          <img [src]="post.authorAvatar" class="author-avatar" *ngIf="post.authorAvatar">
+          <div class="author-info">
+            <span class="author-name">{{post.author}}</span>
+            <span class="post-date">{{getFormattedDate(post.date)}}</span>
+          </div>
+        </div>
+        
+        <div class="post-actions">
+          <button class="like-btn" (click)="$event.stopPropagation(); likePost()">
+            <span class="like-icon">❤️</span>
+            <span class="like-count">{{post.likes}}</span>
+          </button>
+          <div class="comments-count" *ngIf="post.comments">
+            💬 {{post.comments}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

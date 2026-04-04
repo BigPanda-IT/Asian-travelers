@@ -1,0 +1,132 @@
+.sidebar-right {
+    width: 100%;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    background: #F1F5F9;
+    padding: 4px;
+    border-radius: 40px;
+    
+    button {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 32px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.2s;
+      
+      &.active {
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        color: #059669;
+      }
+    }
+  }
+  
+  .tab-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .author-item, .post-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #E2E8F0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .rank {
+    font-weight: 700;
+    color: #059669;
+    width: 28px;
+    font-size: 16px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .info {
+    flex: 1;
+    
+    .name, .title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .stats, .meta {
+      font-size: 11px;
+      color: #64748B;
+      display: flex;
+      gap: 8px;
+    }
+    
+    .likes {
+      color: #EF4444;
+    }
+  }
+  
+  .live-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #E2E8F0;
+    
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .info {
+      .user {
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .post-title {
+        font-size: 11px;
+        color: #64748B;
+      }
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 20px;
+    color: #94A3B8;
+    font-size: 13px;
+  }

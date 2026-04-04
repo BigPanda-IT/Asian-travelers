@@ -1,0 +1,15 @@
+<div class="post-list">
+    <div class="posts-container">
+      <app-post-card 
+        *ngFor="let post of posts$ | async"
+        [post]="post">
+      </app-post-card>
+      
+      <div class="empty-state" *ngIf="(posts$ | async)?.length === 0">
+        <div class="empty-icon">📭</div>
+        <h3>Пока нет статей</h3>
+        <p>Будьте первым, кто поделится находкой!</p>
+        <button class="btn-empty" (click)="scrollToPublish()">📝 Опубликовать запись</button>
+      </div>
+    </div>
+  </div>

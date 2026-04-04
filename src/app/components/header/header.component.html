@@ -1,0 +1,105 @@
+<header class="header">
+  <div class="container">
+    <div class="logo" (click)="goHome()" style="cursor: pointer;">
+        <span class="logo-icon">🌍</span>
+        <span class="logo-text">TravelStories</span>
+    </div>
+    
+    <div class="right-section">
+      <div class="search-group">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            placeholder="Поиск по статьям..." 
+            (input)="onSearch($event)"
+            class="search-input">
+        </div>
+        
+        <div class="auth-section">
+          <ng-container *ngIf="(authService.currentUser$ | async) as user; else loginBtn">
+            <div class="user-avatar">
+              <div class="user-sticker">{{userSticker}}</div>
+              <span class="user-name">{{user.name}}</span>
+            </div>
+            <button class="logout-btn" (click)="logout()"> ➜]  Выйти</button>
+          </ng-container>
+          <ng-template #loginBtn>
+            <button class="login-btn" (click)="showLoginModal = true">
+              👤 Войти
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Модальное окно входа/регистрации -->
+<div class="modal-overlay" *ngIf="showLoginModal" (click)="showLoginModal = false">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-tabs">
+      <button [class.active]="authMode === 'login'" (click)="authMode = 'login'">Вход</button>
+      <button [class.active]="authMode === 'register'" (click)="authMode = 'register'">Регистрация</button>
+    </div>
+
+    <div *ngIf="authMode === 'login'" class="auth-form">
+      <h3>Войдите в свой аккаунт</h3>
+      
+      <p class="name-of-input">Имя пользователя</p>
+      <input 
+        type="text" 
+        [(ngModel)]="loginUsername" 
+        class="auth-input-l">
+      
+      <p class="name-of-input">Пароль</p>
+      <input 
+        type="password" 
+        [(ngModel)]="loginPassword" 
+        class="auth-input-l"
+        (keyup.enter)="doLogin()">
+      
+      <button class="modal-submit" (click)="doLogin()">Войти</button>
+
+      <p class="auth-hint">
+        Нет аккаунта? <span (click)="authMode = 'register'">Зарегистрироваться</span>
+      </p>
+    </div>
+
+    <div *ngIf="authMode === 'register'" class="auth-form">
+      <h3>Создать аккаунт</h3>
+      
+      <input 
+        type="text" 
+        [(ngModel)]="registerUsername" 
+        placeholder="Имя пользователя *"
+        class="auth-input">
+      
+      <input 
+        type="email" 
+        [(ngModel)]="registerEmail" 
+        placeholder="Электронная почта *"
+        class="auth-input">
+      
+      <input 
+        type="password" 
+        [(ngModel)]="registerPassword" 
+        placeholder="Пароль *"
+        class="auth-input">
+      
+      <input 
+        type="password" 
+        [(ngModel)]="registerPasswordConfirm" 
+        placeholder="Повторите пароль *"
+        class="auth-input">
+      
+      <div class="error-message" *ngIf="registerError">{{registerError}}</div>
+      
+      <button class="modal-submit" (click)="doRegister()">Зарегистрироваться</button>
+
+      <p class="auth-hint">
+        Уже есть аккаунт? <span (click)="authMode = 'login'">Войти</span>
+      </p>
+    </div>
+  </div>
+</div>

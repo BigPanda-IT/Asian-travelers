@@ -1,0 +1,111 @@
+<div class="hero-section">
+  <div class="hero-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+    <div class="gradient-orb orb-4"></div>
+    <div class="gradient-orb orb-5"></div>
+  </div>
+
+    <div class="hero-grid">
+      <div class="hero-column left-col">
+        <div class="column-header">
+          <span class="column-icon">🗺️</span>
+          <h3>Страны</h3>
+        </div>
+        <div class="country-list">
+          <div class="country-item" *ngFor="let country of countries" 
+               (click)="filterByCountry(country.name)">
+            <span class="country-flag">{{country.flag}}</span>
+            <span class="country-name">{{country.name}}</span>
+            <span class="country-stats">{{country.posts}} постов</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-center">
+        <h1 class="hero-title">
+          Открывайте мир<br><span class="gradient-text">вместе с нами</span>
+        </h1>
+        
+        <p class="hero-description">
+          Тысячи уникальных мест, проверенных маршрутов и настоящих историй
+          от путешественников со всего мира! <br> <br> Делитесь находками и вдохновляйтесь!
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-number">{{stats.users}}+</div>
+            <div class="stat-label">активных путешественников</div>
+            <div class="stat-trend">📈 {{stats.usersGrowth}} за месяц</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{stats.places}}+</div>
+            <div class="stat-label">уникальных мест</div>
+            <div class="stat-trend">🎯 {{stats.placesLabel}}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{stats.views}}{{stats.viewsLabel}}</div>
+            <div class="stat-label">просмотров в месяц</div>
+            <div class="stat-trend">👀 от читателей</div>
+          </div>
+        </div>
+        
+        <div class="hero-features">
+          <div class="feature" *ngFor="let feature of features">
+            <div class="feature-icon">{{feature.icon}}</div>
+            <div class="feature-title">{{feature.title}}</div>
+            <span class="feature-tooltip">{{feature.tooltip}}</span>
+          </div>
+        </div>
+        
+        <div class="hero-buttons">
+          <button class="btn-primary" (click)="openPublishForm()">
+            <span>📝</span> Опубликовать запись
+          </button>
+          <button class="btn-secondary" (click)="scrollToFeed()">
+            <span>📖</span> Читать статьи
+          </button>
+        </div>
+      </div>
+      
+      <div class="hero-column right-col">
+        <div class="column-tabs">
+          <button [class.active]="rightTab === 'authors'" (click)="rightTab = 'authors'">
+            👤 Топ авторы
+          </button>
+          <button [class.active]="rightTab === 'top'" (click)="rightTab = 'top'">
+            🔥 Топ посты
+          </button>
+        </div>
+        
+        <div class="column-content">
+          <!-- Топ авторы -->
+          <div *ngIf="rightTab === 'authors'" class="author-list">
+            <div class="author-item" *ngFor="let author of topAuthors; let i = index">
+              <div class="author-rank">{{i+1}}</div>
+              <img [src]="author.avatar" class="author-avatar">
+              <div class="author-info">
+                <div class="author-name">{{author.name}}</div>
+                <div class="author-stats">{{author.posts}} постов · ❤️ {{author.likes}}</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Топ посты -->
+          <div *ngIf="rightTab === 'top'" class="top-list">
+            <div class="top-item" *ngFor="let post of topPosts; let i = index">
+              <div class="top-rank">{{i+1}}</div>
+              <div class="top-content">
+                <div class="top-title">{{post.title}}</div>
+                <div class="top-meta">
+                  <span class="top-author">{{post.author}}</span>
+                  <span class="top-likes">❤️ {{post.likes}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

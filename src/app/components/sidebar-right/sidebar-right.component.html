@@ -1,0 +1,59 @@
+<div class="sidebar-right">
+    <div class="tabs">
+      <button [class.active]="activeTab === 'authors'" (click)="activeTab = 'authors'">
+        👤 Авторы
+      </button>
+      <button [class.active]="activeTab === 'top'" (click)="activeTab = 'top'">
+        🔥 Топ
+      </button>
+      <button [class.active]="activeTab === 'live'" (click)="activeTab = 'live'">
+        📈 Live
+      </button>
+    </div>
+    
+    <!-- Вкладка: Топ авторы -->
+    <div class="tab-content" *ngIf="activeTab === 'authors'">
+      <div class="author-item" *ngFor="let author of topAuthors; let i = index">
+        <div class="rank">{{i+1}}</div>
+        <img [src]="author.avatar" class="avatar">
+        <div class="info">
+          <div class="name">{{author.name}}</div>
+          <div class="stats">{{author.posts}} постов · ❤️ {{author.totalLikes}}</div>
+        </div>
+      </div>
+      <div class="empty-state" *ngIf="topAuthors.length === 0">
+        Нет данных
+      </div>
+    </div>
+    
+    <!-- Вкладка: Топ посты -->
+    <div class="tab-content" *ngIf="activeTab === 'top'">
+      <div class="post-item" *ngFor="let post of topPosts; let i = index">
+        <div class="rank">{{i+1}}</div>
+        <div class="info">
+          <div class="title">{{post.title}}</div>
+          <div class="meta">
+            <span class="author">{{post.author}}</span>
+            <span class="likes">❤️ {{post.likes}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="empty-state" *ngIf="topPosts.length === 0">
+        Нет данных
+      </div>
+    </div>
+    
+    <!-- Вкладка: Сейчас читают (Live) -->
+    <div class="tab-content" *ngIf="activeTab === 'live'">
+      <div class="live-item" *ngFor="let reading of currentlyReading">
+        <div class="pulse-dot"></div>
+        <div class="info">
+          <div class="user">{{reading.user}} читает</div>
+          <div class="post-title">{{reading.post}}</div>
+        </div>
+      </div>
+      <div class="empty-state" *ngIf="currentlyReading.length === 0">
+        Загрузка...
+      </div>
+    </div>
+  </div>

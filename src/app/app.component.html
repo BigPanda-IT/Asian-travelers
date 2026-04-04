@@ -1,0 +1,47 @@
+<div class="app">
+  <app-header></app-header>
+  
+  <main class="main-content">
+    <!-- Hero блок -->
+    <div class="hero-wrapper" id="hero">
+      <app-hero
+        (publish)="openPublishForm()"
+        (read)="showFeed()"
+        (countryFilter)="filterByCountry($event)">
+      </app-hero>
+    </div>
+    
+    <!-- Контент с колонками -->
+    <div class="content-with-sidebars" *ngIf="showFeedContent">
+      
+      <!-- ЛЕВАЯ КОЛОНКА (sticky) -->
+      <aside class="sidebar-left sticky-col">
+        <app-sidebar-left
+          [selectedCountry]="selectedCountry"
+          (countrySelected)="filterByCountry($event)">
+        </app-sidebar-left>
+      </aside>
+      
+      <!-- ЦЕНТРАЛЬНАЯ ЛЕНТА -->
+      <div class="feed-wrapper" id="feed">
+        <!-- Форма публикации -->
+        <app-publish-form
+          *ngIf="showPublishForm"
+          (published)="onPostPublished()"
+          (closed)="closePublishForm()">
+        </app-publish-form>
+        
+        <!-- Список статей -->
+        <app-post-list
+          [filterCountry]="selectedCountry">
+        </app-post-list>
+      </div>
+      
+      <!-- ПРАВАЯ КОЛОНКА (sticky) -->
+      <aside class="sidebar-right sticky-col">
+        <app-sidebar-right></app-sidebar-right>
+      </aside>
+      
+    </div>
+  </main>
+</div>
