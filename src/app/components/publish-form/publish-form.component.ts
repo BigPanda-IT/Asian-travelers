@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
@@ -24,6 +24,7 @@ function getRandomSticker(): string {
   templateUrl: './publish-form.component.html',
   styleUrls: ['./publish-form.component.scss']
 })
+
 export class PublishFormComponent {
   @Output() published = new EventEmitter<Post>();
   @Output() closed = new EventEmitter<void>();
@@ -43,15 +44,18 @@ export class PublishFormComponent {
   
   constructor(
     private postService: PostService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) {}
   
   // Выбор файла
   onFileSelected(event: Event) {
+    console.log('Файл выбран');
     const input = event.target as HTMLInputElement;
     
     if (input.files && input.files[0]) {
       const file = input.files[0];
+      console.log('Имя файла:', file.name);
       
       // Проверка размера (максимум 5MB)
       if (file.size > 5 * 1024 * 1024) {
@@ -70,9 +74,12 @@ export class PublishFormComponent {
       // Создаём превью (base64)
       const reader = new FileReader();
       reader.onload = (e) => {
+        console.log('Превью создано');
         this.previewUrl = e.target?.result as string;
+        this.cdr.detectChanges();
       };
       reader.readAsDataURL(file);
+      input.value = '';
     }
   }
   
