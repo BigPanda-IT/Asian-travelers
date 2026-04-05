@@ -13,41 +13,63 @@
       </div>
       
       <div class="form-group">
-        <label>Краткое описание *</label>
+        <label>Описание *</label>
         <textarea rows="4" formControlName="description" placeholder="Расскажите о месте..."></textarea>
       </div>
-      
-      <div class="form-row">
-        <div class="form-group">
-          <label>Страна</label>
-          <select formControlName="country">
-            <option *ngFor="let country of countries" [value]="country">{{country}}</option>
-          </select>
+
+      <div class="form-group">
+        <!-- Скрытый input для выбора файла -->
+        <input 
+          type="file" 
+          #fileInput
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          style="display: none;">
+
+          <div class="form-section">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Страна</label>
+                <select formControlName="country">
+                  <option value="" disabled selected>Выберите страну</option>
+                  <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Теги</label>
+                <input type="text" formControlName="tags" placeholder="#азия #отдых">
+              </div>
+              <div class="form-group">
+                <label>Время чтения (мин)</label>
+                <input type="number" formControlName="readTime" min="1" max="30">
+              </div>
+            </div>   
+          
+            <div class="form-section-in-section"> 
+              <!-- Область для загрузки -->
+              <div class="upload-area" (click)="fileInput.click()">
+                <div *ngIf="!previewUrl" class="upload-placeholder">
+                  <div class="upload-icon">🖼️</div>
+                  <p>Нажмите, чтобы выбрать фото</p>
+                  <small>PNG, JPG, GIF до 5MB</small>
+                </div>
+                
+                <div *ngIf="previewUrl" class="image-preview">
+                  <img [src]="previewUrl" alt="Preview">
+                  <button type="button" class="remove-image" (click)="$event.stopPropagation(); removeImage()">✕</button>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn-cancel" (click)="close()">Отмена</button>
+                <button type="submit" class="btn-submit" [disabled]="!publishForm.valid">
+                  Опубликовать
+                </button>
+              </div>
+            </div>
+            
+          </div>
         </div>
-        <div class="form-group">
-          <label>Теги (через запятую)</label>
-          <input type="text" formControlName="tags" placeholder="#путешествия, #азия...">
-        </div>
-        <div class="form-group">
-          <label>Время чтения (мин)</label>
-          <input type="number" formControlName="readTime" min="1" max="30">
-        </div>
-      </div>
-      
-      <!-- <div class="form-group">
-        <label>URL фото</label>
-        <input type="url" formControlName="imageUrl" (input)="onImageUrlChange()" placeholder="https://...">
-        <div class="image-preview" *ngIf="previewUrl">
-          <img [src]="previewUrl" alt="Preview">
-        </div>
-      </div> -->
-      
-      <div class="form-actions">
-        <button type="button" class="btn-cancel" (click)="close()">Отмена</button>
-        <button type="submit" class="btn-submit" [disabled]="!publishForm.valid">
-          ✨ Опубликовать
-        </button>
-      </div>
     </form>
   </div>
 </div>

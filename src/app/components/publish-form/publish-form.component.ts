@@ -31,7 +31,7 @@ export class PublishFormComponent {
   publishForm = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
-    country: new FormControl('Таиланд'),
+    country: new FormControl('', Validators.required),
     tags: new FormControl(''),
     readTime: new FormControl(5, Validators.min(1)),
     imageUrl: new FormControl('')
@@ -39,19 +39,47 @@ export class PublishFormComponent {
   
   previewUrl: string | null = null;
   countries = ['Япония', 'Таиланд', 'Вьетнам', 'Индия', 'Индонезия'];
+  selectedFile: File | null = null;
   
   constructor(
     private postService: PostService,
     private authService: AuthService
   ) {}
   
-  onImageUrlChange() {
-    const url = this.publishForm.get('imageUrl')?.value;
-    if (url && url.startsWith('http')) {
-      this.previewUrl = url;
-    } else {
-      this.previewUrl = null;
+  // Выбор файла
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      
+      // Проверка размера (максимум 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Файл слишком большой. Максимум 5MB');
+        return;
+      }
+      
+      // Проверка типа
+      if (!file.type.startsWith('image/')) {
+        alert('Пожалуйста, выберите изображение');
+        return;
+      }
+      
+      this.selectedFile = file;
+      
+      // Создаём превью (base64)
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.previewUrl = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
     }
+  }
+  
+  // Удалить фото
+  removeImage() {
+    this.previewUrl = null;
+    this.selectedFile = null;
   }
   
   onSubmit() {
@@ -71,7 +99,7 @@ export class PublishFormComponent {
             readTime: this.publishForm.get('readTime')?.value || 5,
             likes: 0,
             sticker: getRandomSticker(),
-            imageUrl: this.publishForm.get('imageUrl')?.value || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600',
+            imageUrl: this.previewUrl || '',
             date: new Date(),
             comments: 0
           };
