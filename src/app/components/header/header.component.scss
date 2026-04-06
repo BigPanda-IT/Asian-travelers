@@ -1,11 +1,29 @@
 .header {
-    background: rgb(189, 240, 204);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 0;
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    // border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, 
+    rgba(156, 237, 248, 0.05) 0%, 
+    rgba(160, 253, 244, 0.05) 40%, 
+    #ffffff 80%);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    z-index: -1;
+  }
   
 .container {
     max-width: 1400px;
@@ -30,7 +48,7 @@
     .logo-text {
         font-size: 20px;
         font-weight: 700;
-        background: rgb(24, 24, 160);
+        background: linear-gradient(135deg, #059669 0%, #10B981 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -61,7 +79,8 @@
 
     .search-input {
         padding: 8px 16px 8px 32px;
-        border: 2px solid #91c8fc;
+        // border: 2px solid #91c8fc;
+        border: none;  
         border-radius: 40px;
         background: var(--surface);
         width: 200px;
@@ -71,7 +90,7 @@
         
         &:focus {
             outline: none !important;
-            border-color: #5caefc;
+            border: 1px solid #059669;
             width: 200px;
         }
         
@@ -89,16 +108,16 @@
 }
 
 .login-btn {
-    background: #03aa27;
     color: white;
-    border: 2px solid #02831e;
-    padding: 8px 15px;
+    padding: 8px 20px;
     border-radius: 40px;
     font-weight: 500;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
+    background: #1eb384;
+    border: none;
 
     &:hover {
         transform: translateY(-1px);
