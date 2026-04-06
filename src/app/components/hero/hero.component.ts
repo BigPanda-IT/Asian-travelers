@@ -1,6 +1,16 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+const STICKERS = [
+  '🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯',
+  '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐴', '🐝',
+  '🐙', '🦋', '🐳', '🐬', '🐲', '🌵', '🚀', '👩‍🚀', '🧸'
+];
+
+function getRandomSticker(): string {
+  return STICKERS[Math.floor(Math.random() * STICKERS.length)];
+}
+
 @Component({
   selector: 'app-hero',
   standalone: true,
@@ -16,17 +26,20 @@ export class HeroComponent {
   rightTab: 'authors' | 'top' = 'authors';
   
   countries = [
-    { flag: '🇯🇵', name: 'Япония', posts: 156 },
-    { flag: '🇹🇭', name: 'Таиланд', posts: 234 },
-    { flag: '🇻🇳', name: 'Вьетнам', posts: 98 },
-    { flag: '🇮🇳', name: 'Индия', posts: 87 },
-    { flag: '🇮🇩', name: 'Индонезия', posts: 143 }
+    { flag: 'https://flagsapi.com/CN/flat/32.png', name: 'Китай', posts: 13 },
+    { flag: 'https://flagcdn.com/th.svg', name: 'Таиланд', posts: 8 },
+    { flag: 'https://flagcdn.com/jp.svg', name: 'Япония', posts: 11 },
+    { flag: 'https://flagcdn.com/sg.svg', name: 'Сингапур', posts: 2 },
+    { flag: 'https://flagcdn.com/my.svg', name: 'Малайзия', posts: 3 },
+    { flag: 'https://flagcdn.com/vn.svg', name: 'Вьетнам', posts: 7 },
+    { flag: 'https://flagsapi.com/IN/flat/32.png', name: 'Индия', posts: 6 },
+    { flag: 'https://flagcdn.com/id.svg', name: 'Индонезия', posts: 5 }
   ];
   
   topAuthors = [
-    { name: 'Анна Иванова', avatar: 'https://randomuser.me/api/portraits/women/1.jpg', posts: 24, likes: 1234 },
-    { name: 'Макс Петров', avatar: 'https://randomuser.me/api/portraits/men/2.jpg', posts: 18, likes: 987 },
-    { name: 'Елена Смирнова', avatar: 'https://randomuser.me/api/portraits/women/3.jpg', posts: 15, likes: 876 }
+    { name: 'Анна Иванова', sticker: getRandomSticker(), posts: 24, likes: 1234 },
+    { name: 'Макс Петров', sticker: getRandomSticker(), posts: 18, likes: 987 },
+    { name: 'Елена Смирнова', sticker: getRandomSticker(), posts: 15, likes: 876 }
   ];
   
   topPosts = [

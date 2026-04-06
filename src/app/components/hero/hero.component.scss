@@ -117,7 +117,7 @@
 .country-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 
 .country-item {
@@ -128,10 +128,11 @@
   border-radius: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  background: rgba(197, 248, 232, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   
   &:hover {
-    background: rgba(78, 221, 176, 0.2);
+    background: rgb(189, 240, 204);
     transform: translateX(4px);
   }
   
@@ -151,6 +152,7 @@
     background: #ecf1f5;
     padding: 2px 8px;
     border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -406,13 +408,6 @@
   font-size: 16px;
 }
 
-.author-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .author-info {
   flex: 1;
   
@@ -485,4 +480,12 @@
       font-size: 20px;
     }
   }
+}
+
+.country-flag-img {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }

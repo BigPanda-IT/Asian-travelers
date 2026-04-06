@@ -16,7 +16,7 @@
         <div class="country-list">
           <div class="country-item" *ngFor="let country of countries" 
                (click)="filterByCountry(country.name)">
-            <span class="country-flag">{{country.flag}}</span>
+            <img [src]="country.flag" class="country-flag-img" alt="{{country.name}}">
             <span class="country-name">{{country.name}}</span>
             <span class="country-stats">{{country.posts}} постов</span>
           </div>
@@ -84,7 +84,7 @@
           <div *ngIf="rightTab === 'authors'" class="author-list">
             <div class="author-item" *ngFor="let author of topAuthors; let i = index">
               <div class="author-rank">{{i+1}}</div>
-              <img [src]="author.avatar" class="author-avatar">
+              <div class="author-sticker">{{author.sticker}}</div>
               <div class="author-info">
                 <div class="author-name">{{author.name}}</div>
                 <div class="author-stats">{{author.posts}} постов · ❤️ {{author.likes}}</div>
