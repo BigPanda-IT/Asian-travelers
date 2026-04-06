@@ -83,7 +83,7 @@
           <!-- Топ авторы -->
           <div *ngIf="rightTab === 'authors'" class="author-list">
             <div class="author-item" *ngFor="let author of topAuthors; let i = index">
-              <div class="author-rank">{{i+1}}</div>
+              <div class="author-medal">{{getMedal(i)}}</div>
               <div class="author-sticker">{{author.sticker}}</div>
               <div class="author-info">
                 <div class="author-name">{{author.name}}</div>
@@ -95,7 +95,7 @@
           <!-- Топ посты -->
           <div *ngIf="rightTab === 'top'" class="top-list">
             <div class="top-item" *ngFor="let post of topPosts; let i = index">
-              <div class="top-rank">{{i+1}}</div>
+              <div class="author-medal">{{getMedal(i)}}</div>
               <div class="top-content">
                 <div class="top-title">{{post.title}}</div>
                 <div class="top-meta">

@@ -32,20 +32,24 @@ export class HeroComponent {
     { flag: 'https://flagcdn.com/sg.svg', name: 'Сингапур', posts: 2 },
     { flag: 'https://flagcdn.com/my.svg', name: 'Малайзия', posts: 3 },
     { flag: 'https://flagcdn.com/vn.svg', name: 'Вьетнам', posts: 7 },
-    { flag: 'https://flagsapi.com/IN/flat/32.png', name: 'Индия', posts: 6 },
+    { flag: 'https://flagsapi.com/IN/flat/32.png', name: 'Индия', posts: 0 },
     { flag: 'https://flagcdn.com/id.svg', name: 'Индонезия', posts: 5 }
   ];
   
   topAuthors = [
-    { name: 'Анна Иванова', sticker: getRandomSticker(), posts: 24, likes: 1234 },
-    { name: 'Макс Петров', sticker: getRandomSticker(), posts: 18, likes: 987 },
-    { name: 'Елена Смирнова', sticker: getRandomSticker(), posts: 15, likes: 876 }
+    { name: 'Анна Иванова', sticker: getRandomSticker(), posts: 7, likes: 234 },
+    { name: 'Макс Петров', sticker: getRandomSticker(), posts: 5, likes: 145 },
+    { name: 'Елена Смирнова', sticker: getRandomSticker(), posts: 4, likes: 136 },
+    { name: 'Дмитрий Козлов', sticker: getRandomSticker(), posts: 6, likes: 123 },
+    { name: 'Ольга Новикова', sticker: getRandomSticker(), posts: 3, likes: 98 }
   ];
   
   topPosts = [
-    { title: 'Скрытый пляж на Пхукете', likes: 456, author: 'Анна' },
-    { title: 'Бали: рай для серферов', likes: 398, author: 'Макс' },
-    { title: 'Храмы Киото', likes: 345, author: 'Анна' }
+    { title: 'Райский пляж Пхукета', likes: 164, author: 'Анна' },
+    { title: 'Бали: рай для серферов', likes: 121, author: 'Макс' },
+    { title: 'Храмы Киото', likes: 97, author: 'Дмитрий' },
+    { title: 'Вьетнам на байке', likes: 88, author: 'Елена' },
+    { title: 'Токио за 3 дня', likes: 65, author: 'Ольга' },
   ];
   
   stats = {
@@ -73,5 +77,10 @@ export class HeroComponent {
   
   filterByCountry(countryName: string) {
     this.countryFilter.emit(countryName);
+  }
+
+  getMedal(index: number): string {
+    const medals = ['🥇', '🥈', '🥉', '⭐', '⭐'];
+    return medals[index] || '📌';
   }
 }
